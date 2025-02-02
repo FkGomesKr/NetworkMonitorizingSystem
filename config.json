@@ -1,0 +1,137 @@
+{
+    "tasks": [
+      {
+        "task_id": "task-202",
+        "frequency": 1,
+        "devices": [
+          {
+            "device_id": "PC2",
+            "device_metrics": {
+              "cpu_usage": true,
+              "ram_usage": true,
+              "interface_stats": [0]
+            },
+            "link_metrics": {
+              "bandwidth": {
+                "mode": 1,
+                "server_address": "10.0.6.10",
+                "duration": 10,
+                "transport_type": 0,
+                "frequency": 20
+              },
+              "jitter": {
+                "mode": 1, 
+                "server_address": "10.0.6.10",
+                "duration": 10,
+                "frequency": 30
+              },
+              "packet_loss": {  
+                "mode": 0,
+                "server_address": "10.0.5.10",
+                "duration": 10,
+                "frequency": 30
+              },
+              "latency": {
+                "destination": "10.0.4.10",
+                "packet_count": 5,
+                "frequency": 30
+              }
+            },
+            "alertflow_conditions": {
+              "cpu_usage": 5,
+              "ram_usage": 5,
+              "interface_stats": 2000,
+              "packet_loss": 5,
+              "jitter": 100,
+              "latency": 60 
+            }
+          },
+          {
+            "device_id": "PC3",
+            "device_metrics": {
+              "cpu_usage": true,
+              "ram_usage": true,
+              "interface_stats": [0]
+            },
+            "link_metrics": {
+              "bandwidth": {
+                "mode": 0,
+                "server_address": "10.0.6.10",
+                "duration": 10,
+                "transport_type": 0,
+                "frequency": 20
+              },
+              "jitter": {
+                "mode": 0, 
+                "server_address": "10.0.6.10",
+                "duration": 10,
+                "frequency": 20
+              },
+              "packet_loss": {
+                "mode": 1,
+                "server_address": "10.0.5.10",
+                "duration": 10,
+                "frequency": 20
+              },
+              "latency": {
+                "destination": "10.0.6.10",
+                "packet_count": 6,
+                "frequency": 20
+              }
+            },
+            "alertflow_conditions": {
+              "cpu_usage": 85,
+              "ram_usage": 88,
+              "interface_stats": 2500,
+              "packet_loss": 3,
+              "jitter": 120,
+              "latency": 70 
+            }
+          },
+          {
+            "device_id": "PC4",
+            "device_metrics": {
+              "cpu_usage": true,
+              "ram_usage": true,
+              "interface_stats": [0]
+            },
+            "link_metrics": {
+              "bandwidth": {
+                "mode": 0,
+                "server_address": "10.0.6.10",
+                "duration": 10,
+                "transport_type": 0,
+                "frequency": 20
+              },
+              "jitter": {
+                "mode": 0, 
+                "server_address": "10.0.6.10",
+                "duration": 10,
+                "frequency": 20
+              },
+              "packet_loss": {
+                "mode": 0,
+                "server_address": "10.0.5.10",
+                "duration": 10,
+                "frequency": 20
+              },
+              "latency": {
+                "destination": "10.0.6.10",
+                "packet_count": 6,
+                "frequency": 20
+              }
+            },
+            "alertflow_conditions": {
+              "cpu_usage": 5,
+              "ram_usage": 5,
+              "interface_stats": 2500,
+              "packet_loss": 3,
+              "jitter": 120,
+              "latency": 70 
+            }
+          }
+        ]
+      }
+    ]
+  }
+  

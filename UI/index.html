@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Metrics Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+            margin-bottom: 400px;
+        }
+        input[type="file"] {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #efd2ec;
+            color: white;
+        }
+        tr {
+            border-radius: 50px;
+            border: 1px solid #efd2ec;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr.metric-row {
+            background-color: #cff6dc; /* Light green for metrics */
+        }
+        tr.alert-row {
+            background-color: #ffd4d4; /* Light red for alerts */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PC Metrics Viewer</h1>
+        <input type="file" id="fileInput" accept=".json">
+        <table id="metricsTable">
+            <thead>
+                <tr>
+                    <th>Seq Num</th>
+                    <th>Type</th>
+                    <th>Timestamp</th>
+                    <th>Task Type</th>
+                    <th>Metric/Alert Value</th>
+                    <th>Threshold</th>
+                    <th>Server Address</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const jsonData = JSON.parse(e.target.result);
+                displayMetrics(jsonData);
+            };
+            reader.readAsText(file);
+        });
+
+        function displayMetrics(data) {
+            const tableBody = document.querySelector('#metricsTable tbody');
+            tableBody.innerHTML = ''; // Clear the table
+
+            data.metrics_and_alerts.forEach(item => {
+                const row = document.createElement('tr');
+                const seqNumCell = document.createElement('td');
+                const typeCell = document.createElement('td');
+                const timestampCell = document.createElement('td');
+                const taskTypeCell = document.createElement('td');
+                const valueCell = document.createElement('td');
+                const thresholdCell = document.createElement('td');
+                const serverAddressCell = document.createElement('td');
+
+                const isAlert = item.type === 'alert';
+                row.className = isAlert ? 'alert-row' : 'metric-row';
+
+                seqNumCell.textContent = isAlert 
+                    ? item.alert_data.seq_num 
+                    : item.packet_data.seq_num;
+                typeCell.textContent = item.type;
+                timestampCell.textContent = item.timestamp;
+                taskTypeCell.textContent = isAlert 
+                    ? item.alert_data.task_type 
+                    : item.packet_data.task_type;
+                valueCell.textContent = isAlert 
+                    ? item.alert_data.metric_value 
+                    : item.packet_data.metric_value;
+                thresholdCell.textContent = isAlert 
+                    ? item.alert_data.task_threshold 
+                    : 'N/A';
+                serverAddressCell.textContent = !isAlert && item.packet_data.server_adress 
+                    ? item.packet_data.server_adress 
+                    : 'N/A';
+
+                row.appendChild(seqNumCell);
+                row.appendChild(typeCell);
+                row.appendChild(timestampCell);
+                row.appendChild(taskTypeCell);
+                row.appendChild(valueCell);
+                row.appendChild(thresholdCell);
+                row.appendChild(serverAddressCell);
+
+                tableBody.appendChild(row);
+            });
+        }
+    </script>
+</body>
+</html>
