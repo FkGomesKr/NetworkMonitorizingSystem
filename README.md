@@ -1,5 +1,5 @@
 # Network Monitorizing System - Communication by Computers/Computers' Networks
-
+Read the "Enunciado" of the project for context
 #### To run this project you will need:
 - [Python3](https://www.python.org/downloads/)
 - Simulated Local Network, this project used a Linux Ubuntu Virtual Machine dedicated to it provided by Univerisdade do Minho [Linux Ubuntu 20.04 LTS with CORE 7.5.2 Simulator](http://marco.uminho.pt/ferramentas/CORE/xubuncore.html)
